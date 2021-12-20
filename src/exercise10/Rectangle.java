@@ -48,6 +48,4 @@ public class Rectangle extends Figure {
         return false;
     }
 }
-        return false;
-    }
-}
+     
