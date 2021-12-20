@@ -31,26 +31,22 @@ public class Ellipse extends Figure {
 
    
 @Override
-    public boolean equal(Figure otherFigure) {
-        if(otherFigure instanceof Ellipse) {
-            return super.equal(otherFigure);
-        } else{
-            return false;
-        }
+   public boolean equal(Figure figure) {
+        boolean sameA = Utils.equals(side1, figure.side1);
+        boolean sameB = Utils.equals(side2, figure.side2);
+        boolean sameAReversed = Utils.equals(side1, figure.side2);
+        boolean sameBReversed = Utils.equals(side2, figure.side1);
+
+        return (sameA && sameB) || (sameAReversed && sameBReversed);
     }
     
 @Override
     public boolean containsClick(Point click) {
-        double clickX = click.getX();
-        double clickY = click.getY();
-
-        double centerX = startPoint.getX();
-        double centerY = startPoint.getY();
-
-        double part1 = (clickX - centerX) * (clickX - centerX) / (side1 * side1);
-        double part2 = (clickY - centerY) * (clickY - centerY) / (side2 * side2);
-
-        return (part1 + part2) <= 1;
+         if ( ((click.getX() - startPoint.getX()) / Math.pow(side1, 2)) -
+            ((click.getY() - startPoint.getY()) / Math.pow(side2, 2)) <= 1) {
+            return true;
+        }
+        return false;
     }
 }
       
